@@ -1,12 +1,27 @@
 import * as Knex from 'knex';
 
 export async function up(knex: Knex): Promise<any> {
-  await knex.schema.createTable('Order_item', table => {
+  await knex.schema.createTable('OrderItem', table => {
     table.increments('id').primary();
-    table.integer('order_id').unsigned();
-    table.foreign('order_id').references('Order.id');
-    table.integer('item_id').unsigned();
-    table.foreign('item_id').references('Item.id');
+    table.integer('amount').notNullable();
+    table
+      .integer('orderId')
+      .nullable()
+      .unsigned()
+      .references('id')
+      .inTable('Order')
+      .onDelete('CASCADE');
+
+    table
+      .integer('itemId')
+      .nullable()
+      .unsigned()
+      .references('id')
+      .inTable('Item')
+      .onDelete('CASCADE');
+
+    table.dateTime('createdDate').notNullable();
+    table.dateTime('updatedDate').notNullable();
   });
 }
 

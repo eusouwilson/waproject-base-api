@@ -3,8 +3,10 @@ import * as Knex from 'knex';
 export async function up(knex: Knex): Promise<any> {
   await knex.schema.createTable('Order', table => {
     table.increments('id').primary();
-    table.date('date_order').notNullable();
+    table.date('dateOrder').notNullable();
     table.string('client', 50).notNullable();
+    table.dateTime('createdDate').notNullable();
+    table.dateTime('updatedDate').notNullable();
   });
 }
 
