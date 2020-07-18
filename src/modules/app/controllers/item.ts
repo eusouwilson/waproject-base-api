@@ -5,7 +5,7 @@ import { enRoles } from 'modules/database/interfaces/user';
 import { Item } from 'modules/database/models/item';
 
 import { ItemRepository } from '../repositories/item';
-import { ListValidator } from '../validators/user/list';
+import { ListValidator } from '../validators/item/list';
 
 @ApiTags('App: Item')
 @Controller('/item')
