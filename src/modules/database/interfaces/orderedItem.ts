@@ -1,3 +1,5 @@
+import { IOrder } from './order';
+
 export interface IOrderedItem {
   id?: number;
   orderId: number;
@@ -6,4 +8,6 @@ export interface IOrderedItem {
 
   createdDate?: Date;
   updatedDate?: Date;
+
+  orders?: IOrder;
 }

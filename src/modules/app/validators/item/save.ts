@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsEmail, IsInt, IsNotEmpty, IsOptional, IsString, MaxLength, Min, MinLength } from 'class-validator';
+import { IsInt, IsNotEmpty, IsOptional, IsString, MaxLength, Min, MinLength } from 'class-validator';
 import { IItem } from 'modules/database/interfaces/item';
 
 export class SaveValidator implements IItem {
@@ -15,9 +15,9 @@ export class SaveValidator implements IItem {
   @MaxLength(50)
   @ApiProperty({ required: true, type: 'string', minLength: 3, maxLength: 60 })
   public description: string;
+
   @IsNotEmpty()
-  @IsEmail()
-  @MaxLength(8)
-  @ApiProperty({ required: true, type: 'string', maxLength: 8 })
-  public price: number;
+  @IsString()
+  @ApiProperty({ required: true, type: 'string' })
+  public price: string;
 }

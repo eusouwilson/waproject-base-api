@@ -9,8 +9,8 @@ export class Item extends Model implements IItem {
   public id: number;
   @ApiProperty({ type: 'string' })
   public description: string;
-  @ApiProperty({ type: 'number' })
-  public price: number;
+  @ApiProperty({ type: 'string' })
+  public price: string;
   @ApiProperty({ type: 'string', format: 'date-time' })
   public createdDate: Date;
   @ApiProperty({ type: 'string', format: 'date-time' })

@@ -3,6 +3,7 @@ import { Model } from 'objection';
 
 import { IOrderedItem } from '../interfaces/orderedItem';
 import { Item } from './item';
+import { Order } from './order';
 
 export class OrderedItem extends Model implements IOrderedItem {
   @ApiProperty({ type: 'integer' })
@@ -19,19 +20,32 @@ export class OrderedItem extends Model implements IOrderedItem {
   @ApiProperty({ type: 'string', format: 'date-time' })
   public updatedDate: Date;
 
+  @ApiProperty({ nullable: true })
+  public items?: Item[];
+  public order?: Order[];
+
   public static get tableName(): string {
     return 'OrderedItem';
   }
 
   public static get relationMappings(): any {
     return {
-      item: {
+      items: {
         relation: Model.HasOneRelation,
         modelClass: Item,
         filter: (query: any) => query.select('id', 'description', 'price'),
         join: {
           from: 'Item.id',
           to: 'OrderedItem.itemId'
+        }
+      },
+      order: {
+        relation: Model.HasOneRelation,
+        modelClass: Order,
+        filter: (query: any) => query.select('id', 'dateOrder', 'amount'),
+        join: {
+          from: 'Order.id',
+          to: 'OrderedItem.orderId'
         }
       }
     };

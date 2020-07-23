@@ -1,7 +1,7 @@
 export interface IItem {
   id?: number;
   description: string;
-  price: number;
+  price: string;
 
   createdDate?: Date;
   updatedDate?: Date;

@@ -9,12 +9,14 @@ export class Order extends Model implements IOrder {
   public id: number;
   @ApiProperty({ type: 'string' })
   public dateOrder: Date;
-  @ApiProperty({ type: 'string' })
-  public client: string;
+  @ApiProperty({ type: 'integer' })
+  public userId: number;
   @ApiProperty({ type: 'string', format: 'date-time' })
   public createdDate: Date;
   @ApiProperty({ type: 'string', format: 'date-time' })
   public updatedDate: Date;
+
+  public orderedItem: OrderedItem;
 
   public static get tableName(): string {
     return 'Order';
@@ -22,7 +24,7 @@ export class Order extends Model implements IOrder {
 
   public static get relationMappings(): any {
     return {
-      Orders: {
+      orderItem: {
         relation: Model.HasManyRelation,
         modelClass: OrderedItem,
         join: {
@@ -34,6 +36,8 @@ export class Order extends Model implements IOrder {
   }
 
   public $beforeInsert(): void {
+    this.dateOrder = this.updatedDate = new Date();
+
     this.createdDate = this.updatedDate = new Date();
   }
 

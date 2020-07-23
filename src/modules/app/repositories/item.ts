@@ -9,7 +9,6 @@ export class ItemRepository {
   public async list(params: IPaginationParams, transaction?: Transaction): Promise<Page<Item>> {
     let query = Item.query(transaction)
       .select('*')
-      .orderBy('description', params.orderDirection)
       .page(params.page, params.pageSize);
 
     if (params.term) {

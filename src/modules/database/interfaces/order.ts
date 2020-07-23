@@ -1,7 +1,7 @@
 export interface IOrder {
   id?: number;
-  dateOrder: Date;
-  client: string;
+  dateOrder?: Date;
+  userId: number;
 
   createdDate?: Date;
   updatedDate?: Date;
